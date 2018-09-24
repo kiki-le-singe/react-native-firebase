@@ -9,6 +9,17 @@ import Login from '../../components/Login';
 import Loader from '../../components/Loader';
 
 export class AuthenticationScreen extends PureComponent {
+  componentDidUpdate(prevProps) {
+    const { user: userPrevProps } = prevProps;
+    const { user } = this.props;
+
+    if (userPrevProps.success !== user.success) {
+      alert('Authentication succeeded !');
+    } else if (userPrevProps.error !== user.error) {
+      alert('Authentication failed !');
+    }
+  }
+
   _onPressSignIn = (email, password) => {
     const { signInUserRequest, signInUserSuccess, signInUserError } = this.props;
 

@@ -1,17 +1,10 @@
 import React, { PureComponent } from 'react';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
 import { withNavigation } from 'react-navigation';
 
 import * as userActions from '../../redux/actions/userActions';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-});
+import Loader from '../../components/Loader';
 
 export class RootScreen extends PureComponent {
   constructor() {
@@ -44,9 +37,7 @@ export class RootScreen extends PureComponent {
 
   render() {
     return (
-      <View style={styles.container}>
-        <ActivityIndicator size="large" />
-      </View>
+      <Loader loading />
     );
   }
 }

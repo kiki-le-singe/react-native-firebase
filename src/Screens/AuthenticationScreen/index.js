@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 import * as userActions from '../../redux/actions/userActions';
 import Login from '../../components/Login';
+import Loader from '../../components/Loader';
 
 export class AuthenticationScreen extends PureComponent {
   _onPressSignIn = (email, password) => {
@@ -36,6 +37,10 @@ export class AuthenticationScreen extends PureComponent {
     // console.log('languageCode', firebase.auth().languageCode);
     // console.log('currentUser', firebase.auth().currentUser);
 
+    if (user.loading) {
+      return <Loader loading />;
+    }
+
     // If the user has not authenticated
     if (!user.connected) {
       return <Login onPressSignIn={this._onPressSignIn} />;
@@ -54,6 +59,9 @@ AuthenticationScreen.propTypes = {
   signInUserRequest: PropTypes.func.isRequired,
   signInUserSuccess: PropTypes.func.isRequired,
   signInUserError: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    connected: false,
+  }).isRequired,
 };
 
 const mapStateToProps = ({ user }) => ({

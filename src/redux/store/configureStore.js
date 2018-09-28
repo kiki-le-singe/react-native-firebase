@@ -1,19 +1,9 @@
 // @TODO how to implement a store for prod and dev ? See: https://github.com/reduxjs/redux/tree/master/examples/real-world/src/store
 
-import { AsyncStorage } from 'react-native';
 import { createStore } from 'redux';
-import { persistStore, persistReducer } from 'redux-persist';
+import { persistStore } from 'redux-persist';
 
-import rootReducer from '../reducers';
-import { blacklist, whitelist } from './constants';
-
-const persistConfig = {
-  key: 'APP_',
-  storage: AsyncStorage,
-  blacklist,
-  whitelist,
-};
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+import persistedReducer from '../reducers';
 
 export default (preloadedState) => {
   const store = createStore(
